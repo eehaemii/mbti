@@ -1,0 +1,117 @@
+// @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&display=swap');
+
+// variable
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content; 
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    } 
+}
+
+@mixin animation($animation) {
+	-webkit-animation: $animation;
+	-moz-animation: $animation;
+	-ms-animation: $animation;
+	animation: $animation;
+}
+
+// mediaQuery breaking point :: 반응형 변곡점 설정
+@mixin breakPoint($point:null, $minpoint:0px) {
+	@media all and ( min-width: #{$minpoint} ) and ( max-width: #{$point} ) {
+		@content;
+	}
+}
+
+ul,li{list-style:none;}
+li{text-align: left;}
+
+.container{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 100vh;
+    margin: auto;
+    font-family: 'Cute Font', cursive;
+    cursor:default
+}
+
+button{
+    cursor: pointer;
+    + button{margin-top: 30px}
+}
+.btn__start{
+    border: 2px solid #3daadb!important;
+    border-radius: 5px!important;
+    background-color: #3daadb!important;
+    color:#fff!important;
+    &:hover, &:focus {
+        @include animation(gelatine 0.5s 1);
+        transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    }
+}
+
+.title{
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.cont__box{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    &--item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        font-size: 18px;
+        line-height: 18px;
+        box-sizing: border-box;
+        word-break: keep-all;
+    }
+    &--typeTxt{
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .bn-bottom{border-bottom: 0;}
+    .bn-left{border-left: 0;}
+}
+
+.type__box{
+    &--item{
+        font-family: 'Cute Font', cursive;
+        padding: 10px 5px;
+        background-color: rgba(218,243,255,0.8);
+        border-radius: 10px;
+        font-size: 18px;
+        box-sizing: border-box;
+    }
+    &--flex{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
+    }
+}
+
+@include keyframes(gelatine){
+    0%{transform: scale(1, 1);}
+    25% {transform: scale(0.9, 1.1);}
+    50% {transform: scale(1.1, 0.9);}
+    75% {transform: scale(0.95, 1.05);}
+}
+
+/* media stylings =================================== */
+@include breakPoint(420px) {
+    .container{width: 90%;}
+}
